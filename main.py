@@ -289,7 +289,7 @@ def render_colors(matrix: list[list[Tile]], colors: dict[str, str]) -> None:
         output_row: list[str] = []
         for val in row:
             color = colors[val]
-            output_row.append(color + val + colorama.Style.RESET_ALL)
+            output_row.append(color + "■ " + colorama.Style.RESET_ALL)
 
         print("".join(output_row))
 
@@ -364,8 +364,17 @@ input_matrix2 = [
     ['C','B','B','C'],
     ['A','C','C','A'],
 ]
+input_matrix3 = [
+    ['A','A','A','A'],
+    ['C','B','A','C'],
+    ['A','A','A','A'],
+    ['A','C','B','A'],
+    ['C','B','B','C'],
+    ['C','B','B','C'],
+    ['A','C','C','A'],
+]
 
-compatibilities, weights = parse_example_matrix(input_matrix)
+compatibilities, weights = parse_example_matrix(input_matrix3)
 compatibility_oracle = CompatibilityOracle(compatibilities)
 model = Model((50, 10), weights, compatibility_oracle)
 output = model.run()
